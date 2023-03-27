@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from functions import *
 import math
-
+###----Question 1----####
 A_assist = np.random.binomial(size=N*n, n=1, p= 0.5)
 A = A_assist.reshape((N,n))
 epsilon_L = np.linspace(0,1,50)
@@ -36,3 +36,5 @@ ax1.set_ylabel('Empirical Probability', color='g')
 ax2.set_ylabel('Hoeffding bound', color='b')
 plt.title("Q1.c")
 plt.show()
+
+###----Question 1----####
