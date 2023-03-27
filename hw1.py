@@ -7,6 +7,7 @@ A = A_assist.reshape((N,n))
 epsilon_L = np.linspace(0,1,50)
 x = []         #epsilonvalues
 y = []         #emprical_prob
+z = "hi"
 
 def emprical_prob_cal(empir_mean: float,epsilon: float) -> int:
     res = 0
