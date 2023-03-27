@@ -16,21 +16,23 @@ test_labels = labels[idx[10000:]]
 print(data[0].shape)
 
 def k_NN(t_images: np.array,v_labels: np.array,q_image: np.array,k: int) -> np.array:
-    k_dist = numpy.array([])
-    k_neighbors = np.zeros(k)
-    k_labels = np.zeros(k)
+    if k > t_images.size:
+        return "invalid k input"
+    k_dist = np.array([])
+    k_neighbors = np.array([])
+    k_labels = np.array([])
+    i = 0
     for image in t_images:
-        i = 0
         dist = np.linalg.norm(image - q_image)
         if (i==0):
             k_dist = np.insert(k_dist,k_dist.size,dist)
-            k_neighbors = np.insert(k_neighbors,k_neighbors.size,image)
+            k_neighbors = image
             k_labels = np.insert(k_labels,k_labels.size,v_labels[i])
         else:
             max_val = np.amax(k_dist)
             if (k_dist.size < k):
                 k_dist = np.insert(k_dist,k_dist.size,dist)
-                k_neighbors = np.insert(k_neighbors,k_neighbors.size,image)
+                k_neighbors = np.vstack([k_neighbors,image])
                 k_labels = np.insert(k_labels,k_labels.size,v_labels[i])
             elif (dist <= max_val):
                 max_index = np.where(k_dist == max_val)[0]
@@ -38,8 +40,14 @@ def k_NN(t_images: np.array,v_labels: np.array,q_image: np.array,k: int) -> np.a
                 k_neighbors[max_index] = image
                 k_labels[max_index] = v_labels[i]
         i+=1
-    pred_lab = np.bincount(k_labels).argmax()
-    return pred_lab
+    values, counts = np.unique(k_labels, return_counts=True)
+    return (values[counts.argmax()])
+
+firs_10_images = train[:10]
+firs_10_labels = labels[:10]
+image_test = test[0]
+
+print(k_NN(firs_10_images,firs_10_labels,image_test,3))
 
 
         

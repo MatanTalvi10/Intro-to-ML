@@ -4,9 +4,8 @@ import math
 import numpy.random
 from sklearn.datasets import fetch_openml
 
-k_dist = np.full((1, ), np.inf)
-k_dist = np.insert(k_dist,k_dist.size,2)
-k_dist = np.insert(k_dist,k_dist.size,8)
-print(k_dist)
-print(k_dist[1])
-print(np.amax(k_dist))
+
+my_array = np.array([1, 2.2, 4, 4, 4, 5, 6, 7, 12, 12, 12])
+print(np.unique(my_array, return_counts=True))
+values, counts = np.unique(my_array, return_counts=True)
+print(values[counts.argmax()])
