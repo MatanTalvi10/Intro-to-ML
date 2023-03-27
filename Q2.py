@@ -13,7 +13,6 @@ train = data[idx[:10000], :].astype(int)
 train_labels = labels[idx[:10000]]
 test = data[idx[10000:], :].astype(int)
 test_labels = labels[idx[10000:]]
-print(data[0].shape)
 
 def k_NN(t_images: np.array,v_labels: np.array,q_image: np.array,k: int) -> np.array:
     if k > t_images.size:
@@ -43,11 +42,24 @@ def k_NN(t_images: np.array,v_labels: np.array,q_image: np.array,k: int) -> np.a
     values, counts = np.unique(k_labels, return_counts=True)
     return (values[counts.argmax()])
 
-firs_10_images = train[:10]
-firs_10_labels = labels[:10]
-image_test = test[0]
+firs_1000_images = train[:1000]
+firs_1000_labels = labels[:1000]
 
-print(k_NN(firs_10_images,firs_10_labels,image_test,10))
+def test_algo(n: int,k: int,) -> float:
+    images_t = train[:n]
+    labels_t = labels[:n]
+    j = 0
+    correct = 0
+    for t_image in test:
+        res = k_NN(images_t,labels_t,t_image,k)
+        wanted = labels_t[j]
+        if (str(res) == wanted):
+            correct+=1
+        j+=1
+    return (correct/test.size)
+
+print(test_algo(1000,10))
+
 
 
         
