@@ -47,7 +47,7 @@ firs_10_images = train[:10]
 firs_10_labels = labels[:10]
 image_test = test[0]
 
-print(k_NN(firs_10_images,firs_10_labels,image_test,3))
+print(k_NN(firs_10_images,firs_10_labels,image_test,10))
 
 
         
